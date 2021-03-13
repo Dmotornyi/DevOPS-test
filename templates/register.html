@@ -5,10 +5,14 @@
     <title>Registration</title>
 </head>
 <body>
+    <form action="{{url_for('register')}}"  novalidate method="post">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" placeholder="input name"><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Input email"><br>
         <label for="psw">Password</label>
         <input type="password" name="psw" id="psw" placeholder="input password"><br>
-
+        <button type="submit">Register</button>
+    </form>
 </body>
 </html>

@@ -1,10 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
 <h1 align="center"> Please login </h1>
-<div align="center">
     <form action="{{url_for('login')}}" novalidate method="post">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="input name"><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="input Mail"><br>
         <label for="psw">Password</label>
         <input type="password" name="psw" id="psw" placeholder="input password"><br>
+        <button type="submit">Login</button>
         <a href="/register">Register form</a>
     </form>
-</div>
+</body>
+</html>
