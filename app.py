@@ -1,6 +1,7 @@
 import sqlite3
 import os
 from flask import Flask, g, render_template
+from DBase import DBase
 DATABASE = '/Users/dmotornyi/PycharmProjects/DevOPS-test/project.db'
 SECRET_KEY = 'janfljsdnfjlasndfljnsalfgkmdksmglvdafngjlstghwet'
 
@@ -36,6 +37,12 @@ def get_db():
 @app.route('/login', methods=["POST","GET"])
 def login():
     return render_template("login.html")
+
+@app.route('/register', methods=["POST","GET"])
+    db = get_db()
+    dbase = DBase(db)
+    if request.method == "POST":
+        
 
 
 if __name__ == "__main__":

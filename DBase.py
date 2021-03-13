@@ -28,4 +28,11 @@ class DBase:
     def getUser(self, email):
         try:
             self.__cur.execute(f"SELECT * FROM users WHERE email = '{email}' LIMIT 1")
-            res = self.__cur.fetchone
+            res = self.__cur.fetchone()
+            if not res:
+                print('No users with simular email')
+                return False
+            return res
+        except sqlite3.Error as e:
+            print('Sql error' + str(e))
+        return False
