@@ -1,7 +1,10 @@
 import sqlite3
 import os
-from flask import Flask, g, render_template
+from flask import Flask, g, render_template, redirect, url_for, request
+from flask_login import login_user, LoginManager, login_required, logout_user
 from DBase import DBase
+from werkzeug.security import generate_password_hash, check_password_hash
+from UserLogin import  UserLogin
 DATABASE = '/Users/dmotornyi/PycharmProjects/DevOPS-test/project.db'
 SECRET_KEY = 'janfljsdnfjlasndfljnsalfgkmdksmglvdafngjlstghwet'
 
@@ -33,17 +36,31 @@ def get_db():
 
 
 
-
+@app.route('/')
 @app.route('/login', methods=["POST","GET"])
 def login():
+    db = get_db()
+    dbase = DBase(db)
+    if request.method == ["POST"]:
+        user = dbase.getUser(request.form['email'])
+        if user and check_password_hash(user['psw'], request.form['psw']):
+            userlogin = UserLogin().create(user)
+            login_user(userlogin)
+            return redirect('???')
     return render_template("login.html")
 
 @app.route('/register', methods=["POST","GET"])
+def register():
     db = get_db()
     dbase = DBase(db)
     if request.method == "POST":
-        
-test another branch
+        if len(request.form['name']) > 3 and len(request.form['psw']) > 3:
+            hash = generate_password_hash(request.form['psw'])
+            res = dbase.addUser(request.form['name'], request.form['email'], hash)
+    return render_template("register.html")
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
