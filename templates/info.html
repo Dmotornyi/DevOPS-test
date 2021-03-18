@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
     <title>info</title>
 </head>
+<h1>Hi {{cuser}}</h1>
 <body>
+<a href="{{url_for('logout')}}">Выйти из профиля</a>
+<table border="1">
+    <thead>
+             <tr>
+                 <th> # </th>
+                 <th> name </th>
+                 <th> email</th>
+                 <th> register time</th>
+             </tr>
+    </thead>
+    {% for p in userlist %}
+            <tbody>
+            <tr>
+                <th>{{p.id}}</th>
+                <th>{{p.name}}</th>
+                <th>{{p.email}}</th>
+                <th>{{p.time}}</th>
+            </tr>
+            </tbody>
+        {% endfor %}
+</table>
 <a>info</a>
 </body>
 </html>

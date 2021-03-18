@@ -1,7 +1,7 @@
 import sqlite3
 import os
 from flask import Flask, g, render_template, redirect, url_for, request
-from flask_login import login_user, LoginManager, login_required, logout_user
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from DBase import DBase
 from werkzeug.security import generate_password_hash, check_password_hash
 from UserLogin import UserLogin
@@ -81,7 +81,9 @@ def logout():
 
 @app.route('/info')
 def info():
-    return render_template('info.html')
+    db = get_db()
+    dbase = DBase(db)
+    return render_template('info.html', userlist=dbase.getUserList(), cuser=current_user.get_name())
 
 
 if __name__ == "__main__":

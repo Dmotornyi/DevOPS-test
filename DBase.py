@@ -51,3 +51,14 @@ class DBase:
         except sqlite3.Error as e:
             print('Sql error' + str(e))
         return False
+
+
+    def getUserList(self):
+            try:
+                self.__cur.execute(f"SELECT id, name, email, time FROM users ORDER BY time DESC LIMIT 5")
+                res = self.__cur.fetchall()
+                if res: return res
+            except sqlite3.Error as e:
+                print("Ошибка получения статьи из БД " + str(e))
+
+            return []
