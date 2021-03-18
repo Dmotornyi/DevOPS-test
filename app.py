@@ -80,6 +80,7 @@ def logout():
 
 
 @app.route('/info')
+@login_required
 def info():
     db = get_db()
     dbase = DBase(db)
